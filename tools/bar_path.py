@@ -9,7 +9,7 @@ and reports, per rep:
   - ascent speed: average (distance / time), peak, and the sticking point =
     slowest moment between 20% and 80% of the way up
   - horizontal drift in the image
-Outputs (in --out):
+Outputs (in --out, default bar/ next to the video):
   bar-path.jpg      every rep's path drawn on a standing frame
   bar-path-chart.png  each rep's path, horizontal vs vertical at the same scale
   bar-timeline.png  bar height and vertical speed over the whole video
@@ -23,7 +23,7 @@ because the plate looks bigger the closer it is to the camera. Without it,
 everything is in pixels.
 
 Usage:
-  .venv/bin/python tools/bar_path.py videos/IMG_0110.mov --box-t 4.0 --box 465,225,100,105 \
+  .venv/bin/python tools/bar_path.py results/2026-11-05-squat/IMG_0110.mov --box-t 4.0 --box 465,225,100,105 \
       --plate-cal 4.0:220,13.4:250
   --box x,y,w,h  = rectangle around the plate HUB (where the sleeve meets the
                    plate, with the collar/clip) at time --box-t, in full-size video
@@ -78,8 +78,9 @@ def main():
     ap.add_argument("--plate-cal", help="t1:px1,t2:px2 plate diameter on screen at two times")
     ap.add_argument("--plate-mm", type=float, default=450, help="real plate diameter (bumper plates: 450)")
     ap.add_argument("--track-scale", type=float, default=1.0, help="downscale (<1) to track faster, at some precision cost")
-    ap.add_argument("--out", default="frames/bar")
+    ap.add_argument("--out", help="output folder (default: bar/ next to the video)")
     a = ap.parse_args()
+    a.out = a.out or os.path.join(os.path.dirname(a.video), "bar")
     os.makedirs(a.out, exist_ok=True)
 
     s = a.track_scale

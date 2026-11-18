@@ -18,8 +18,8 @@ glitches: marked with x and left out of the smoothed lean/gap stats.
 Assumes a static camera (pixel heights are only comparable within one video).
 
 Usage:
-  .venv/bin/python tools/pose_guides.py videos/IMG_0110.mov --reps 1.7,7.2,13.4,19.6
-  options: --step 0.4 --count 6 --fps 5 --out frames/guides
+  .venv/bin/python tools/pose_guides.py results/2026-11-05-squat/IMG_0110.mov --reps 1.7,7.2,13.4,19.6
+  options: --step 0.4 --count 6 --fps 5 --out <video's folder>/guides
 Pose detections are cached in <out>/poses-<video name>.json, so re-running (or resuming after a
 timeout) skips frames that are already done.
 """
@@ -107,9 +107,10 @@ def main():
     ap.add_argument("--step", type=float, default=0.4)
     ap.add_argument("--count", type=int, default=6)
     ap.add_argument("--fps", type=float, default=5, help="sampling rate for the whole-video plot (0 = skip)")
-    ap.add_argument("--out", default="frames/guides")
+    ap.add_argument("--out", help="output folder (default: guides/ next to the video)")
     ap.add_argument("--height", type=int, default=700)
     a = ap.parse_args()
+    a.out = a.out or os.path.join(os.path.dirname(a.video), "guides")
     os.makedirs(a.out, exist_ok=True)
     stem = os.path.splitext(os.path.basename(a.video))[0]
     cache_p = os.path.join(a.out, f"poses-{stem}.json")  # one cache per video

@@ -57,5 +57,5 @@ fi
 
 echo "==> Check"
 "$VENV/bin/python" -c "import torch, cv2, ultralytics; assert hasattr(cv2, 'TrackerCSRT_create'), 'OpenCV contrib missing'; print('torch', torch.__version__, '| ultralytics', ultralytics.__version__, '| opencv', cv2.__version__, '+ contrib')"
-echo "Done. Run:  $VENV/bin/python tools/pose_guides.py videos/IMG_0110.mov --reps 1.7,7.2,13.4,19.6"
-echo "      and:  $VENV/bin/python tools/bar_path.py videos/IMG_0110.mov --box-t 4.0 --box 465,225,100,105 --plate-cal 4.0:220,13.4:250"
+echo "Done. Re-run the example check:  bash results/2026-11-05-squat/run.sh"
+echo "      New checks: see \"Adding a new check\" in SETUP.md"

@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-05
 **Lift:** High-bar back squat, 4 reps, weightlifting shoes
-**Video:** `videos/IMG_0110.mov` 23.5 s, filmed low from behind and off to one side (rear three-quarter)
+**Video:** `IMG_0110.mov` 23.5 s, filmed low from behind and off to one side (rear three-quarter)
 
 > Note: this angle hides some details. Knee tracking and hip shift can't be judged reliably from it, and the torso angles below are measured in the 2D image, not as your true side-on angle. They're good for comparing reps and frames with each other, not as absolute numbers.
 
@@ -23,7 +23,7 @@
 - `rep1-descent.jpg`: first descent (0.0 / 0.3 / 0.6 / 1.0 s)
 - `rep1-ascent.jpg` … `rep4-ascent.jpg`: plain ascent strips from the first pass. ⚠ These start 0.4–0.7 s before the true bottom, so use the guide versions below.
 
-**Guide overlays** (`frames/guides/`)
+**Guide overlays** (`guides/`)
 - `rep1-ascent-guides.jpg` … `rep4-ascent-guides.jpg`: from the true bottom to +2 s, every 0.4 s. In each frame:
   - 🟠 orange dashed line = **hip** height at the bottom
   - 🔵 cyan dashed line = **shoulder** height at the bottom
@@ -34,7 +34,7 @@
 - `gap-vs-bottom.csv`: per rep, the vertical hip–shoulder gap at the bottom and how much it shrinks on the ascent
 - `ascent-measurements.csv`: the numbers behind the strips; `poses-IMG_0110.json`: raw detections (cache)
 
-**Barbell travel** (`frames/bar/`)
+**Barbell travel** (`bar/`)
 - `bar-path-chart.png`: each rep's bar path, horizontal vs vertical at the same scale, in mm
 - `bar-path.jpg`: the same paths drawn on a video frame
 - `bar-timeline.png`: bar height and vertical speed across the whole set
@@ -43,7 +43,7 @@
 **Tools**
 - `tools/pose_guides.py`: body landmarks, guide overlays, lean and gap
 - `tools/bar_path.py`: barbell tracking
-- See [SETUP.md](SETUP.md).
+- See [SETUP.md](../../SETUP.md).
 
 ## What looks good
 
@@ -113,20 +113,20 @@ If it holds up in a side view, here's what usually helps:
 - **Cue:** "push your upper back into the bar" coming out of the bottom.
 - **For the sticking point on later reps:** pin squats or 1¼ reps set at the stall height, and check whether the load is too heavy for clean reps 3–4.
 
-**Rep 1**: `frames/guides/rep1-ascent-guides.jpg`
-![Rep 1 ascent guides](frames/guides/rep1-ascent-guides.jpg)
+**Rep 1**: `guides/rep1-ascent-guides.jpg`
+![Rep 1 ascent guides](guides/rep1-ascent-guides.jpg)
 
-**Rep 2**: `frames/guides/rep2-ascent-guides.jpg`
-![Rep 2 ascent guides](frames/guides/rep2-ascent-guides.jpg)
+**Rep 2**: `guides/rep2-ascent-guides.jpg`
+![Rep 2 ascent guides](guides/rep2-ascent-guides.jpg)
 
-**Rep 3** (biggest lean, sticking point): `frames/guides/rep3-ascent-guides.jpg`
-![Rep 3 ascent guides](frames/guides/rep3-ascent-guides.jpg)
+**Rep 3** (biggest lean, sticking point): `guides/rep3-ascent-guides.jpg`
+![Rep 3 ascent guides](guides/rep3-ascent-guides.jpg)
 
-**Rep 4** (big lean, sticking point): `frames/guides/rep4-ascent-guides.jpg`
-![Rep 4 ascent guides](frames/guides/rep4-ascent-guides.jpg)
+**Rep 4** (big lean, sticking point): `guides/rep4-ascent-guides.jpg`
+![Rep 4 ascent guides](guides/rep4-ascent-guides.jpg)
 
-**Whole set**: `frames/guides/hip-shoulder-timeline.png`
-![Hip/shoulder timeline](frames/guides/hip-shoulder-timeline.png)
+**Whole set**: `guides/hip-shoulder-timeline.png`
+![Hip/shoulder timeline](guides/hip-shoulder-timeline.png)
 
 ## Barbell travel
 
@@ -154,9 +154,9 @@ What this shows:
 - **The fast finish** is mostly your torso swinging back upright, which lifts the bar quickly. It's part of the hips-first pattern, not extra leg drive.
 - **The bar path is near-vertical and repeatable:** 46–59 mm of side-to-side movement on screen, slightly the widest on rep 4. From this angle, forward/back and sideways movement can't be separated, so I can't tell whether the bar drifts forward over your toes during the hips-first phase. A side view would show that.
 
-![Bar path per rep](frames/bar/bar-path-chart.png)
+![Bar path per rep](bar/bar-path-chart.png)
 
-![Bar height and speed](frames/bar/bar-timeline.png)
+![Bar height and speed](bar/bar-timeline.png)
 
 **How accurate this is:**
 - **Scale:** I measured the plate size by hand to about ±5 px, so mm and m/s values are good to about ±3% from that alone.
@@ -171,7 +171,7 @@ What this shows:
 
 ## Next steps
 
-- [ ] Film a side-view set and run `pose_guides.py` on it (see [SETUP.md](SETUP.md))
+- [ ] Film a side-view set and run `pose_guides.py` on it (see [SETUP.md](../../SETUP.md))
 - [ ] Practice breaking at the hips and knees together on warm-up sets (tempo squats help)
 - [ ] Add pause squats; cue "push your upper back into the bar"
 - [ ] Track average ascent speed per rep (`bar-reps.csv`): this set lost 27% from rep 1 to 4, and the sticking-point speed halved
@@ -179,14 +179,15 @@ What this shows:
 
 ## Re-running the tool
 
-Setup, usage and options are in [SETUP.md](SETUP.md). To regenerate this analysis:
+Setup, usage and options are in [SETUP.md](../../SETUP.md). To regenerate this analysis:
 
 ```bash
-cd ~/form-check
-bash tools/setup.sh          # first time only
-.venv/bin/python tools/pose_guides.py videos/IMG_0110.mov --reps 1.7,7.2,13.4,19.6 --fps 10
-.venv/bin/python tools/bar_path.py videos/IMG_0110.mov --box-t 4.0 --box 465,225,100,105 --plate-cal 4.0:220,13.4:250
+cd ~/lift-form-check
+bash tools/setup.sh                         # first time only
+bash results/2026-11-05-squat/run.sh
 ```
+
+[`run.sh`](run.sh) holds the exact commands and parameters for this video (rep bottoms, plate box, calibration). Outputs go to `guides/` and `bar/` in this folder.
 
 ## Changes log
 
@@ -199,3 +200,4 @@ bash tools/setup.sh          # first time only
 - **v7 → v8:** Added the Barbell travel section (`tools/bar_path.py`, `frames/bar/`): plate-hub tracking, depth, ascent speed, sticking point and bar path.
 - **v8 → v9:** Added average descent speed to `bar-reps.csv` and the Barbell travel table, and renamed the Down/Up columns to Descent/Ascent duration.
 - **v9 → v10:** Split out of the `training-log` repo into a standalone repo. The video now lives in `videos/`, and all commands run from the repo root.
+- **v10 → v11:** Repo renamed to `lift-form-check`. Each check now has its own folder under `results/`; this one is `results/2026-11-05-squat/`, with the video, this analysis (renamed from `squat-form-analysis-2026-11-05.md`), `frames/`, `guides/`, `bar/` and a `run.sh` with the exact commands.
