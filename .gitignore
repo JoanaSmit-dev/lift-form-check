@@ -1,0 +1,8 @@
+# Downloadable tooling: recreate with `tools/setup.sh` (see SETUP.md)
+.venv/
+tools/models/
+
+# Python / OS clutter
+__pycache__/
+*.pyc
+.DS_Store

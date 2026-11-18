@@ -1,0 +1,7 @@
+# Pose-guide tool dependencies. Tested with ultralytics 8.4.203 / torch 2.14.1.
+ultralytics>=8.3,<9
+opencv-python-headless>=4.8
+# opencv-contrib-python-headless (CSRT tracker for bar_path.py) is installed by
+# setup.sh after these, matching the opencv-python version ultralytics pulls in.
+matplotlib>=3.7
+numpy
