@@ -55,3 +55,7 @@ Both tools write next to the video by default, so a new check is: make a folder,
 - Speeds in m/s depend on a hand-measured plate size (about ±3%). Trust rep-to-rep trends more than single values.
 
 More detail, options and troubleshooting are in [SETUP.md](SETUP.md).
+
+## License
+
+The code in this repo is [MIT](LICENSE). It depends on [Ultralytics](https://github.com/ultralytics/ultralytics), whose package and YOLO11 weights (installed by `setup.sh`, not included here) are AGPL-3.0, so anything you distribute that bundles them falls under AGPL terms.
